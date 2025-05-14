@@ -1,10 +1,13 @@
-﻿namespace TextGame
+﻿using static TextGame.Story1;
+
+namespace TextGame
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+           Story1 story1 = new Story1();
+           story1.StartGame();
         }
     }
 }
