@@ -6,6 +6,9 @@
         {
             Game game = new Game();
             game.StartGame();
+
+            //PaertStory cedar = new PaertStory();
+            //cedar.StartCedarCreek();
         }
     }
 }
