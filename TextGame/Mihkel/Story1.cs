@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TextGame;
 using TextGame.Mihkel;
 
 public class Story1
@@ -53,6 +54,7 @@ public class Story1
                     break;
                 case "3":
                     Console.WriteLine("Exiting application...");
+                    return true;
                     return;
                 default:
                     Console.WriteLine("Invalid choice. Please try again.");
