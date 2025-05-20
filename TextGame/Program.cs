@@ -1,17 +1,20 @@
-﻿namespace TextGame
+﻿using TextGame.CedarCreek;
+
+namespace TextGame
 {
     internal class Program
     {
         static void Main(string[] args)
         {
             // ToDoList Mihkel
-            Story1 manager = new Story1();
-            manager.Run();
-            Game game = new Game();
-            game.StartGame();
+            //Story1 manager = new Story1();
+            //manager.Run();
+            //Game game = new Game();
+            //game.StartGame();
 
-            //PaertStory cedar = new PaertStory();
+            PaertStory cedar = new PaertStory();
             //cedar.StartCedarCreek();
+            cedar.TavernInteractions();
         }
     }
 }

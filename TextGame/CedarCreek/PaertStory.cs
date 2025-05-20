@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TextGame
+namespace TextGame.CedarCreek
 {
     public enum StatusEffects
     {
@@ -16,9 +16,18 @@ namespace TextGame
         Heavy,
         Light
     }
-
     public class PaertStory
     {
+        private static string _location;
+        private static int _baseLightDamage = 25;
+        private static int _baseHeavyDamage = 40;
+        private static int _enemyBaseHealth = 100;
+        private string name = "";
+        private static int _health = 22;
+        private static int _gold = 0;
+        StatusEffects StatusEffects { get; set; }
+        StatusEffects status = StatusEffects.Poisoned;
+        List<string> Inventory = new List<string>();
         public void DialogPrompt(string? npcName, string? text, string? option1, string? option2)
         {
             Console.WriteLine($"{npcName}:");
@@ -33,9 +42,43 @@ namespace TextGame
 
         public void InventoryCheck()
         {
+            Console.WriteLine($"You currently have {_gold} gold");
             foreach (var item in Inventory)
             {
                 Console.WriteLine(item);
+            }
+        }
+
+        public void TavernInteractions()
+        {
+            List<StoreItem> storeitems = new();
+            storeitems.Add(new StoreItem { itemName = "Medicine", itemPrice = 5});
+            storeitems.Add(new StoreItem { itemName = "Dagger", itemPrice = 15});
+            storeitems.Add(new StoreItem { itemName = "Beer", itemPrice = 2});
+            Console.WriteLine();
+            Console.Write("You've entered the Last Drop, you may buy different goods here, such as gear to help in fights, and medicine to manage your health.");
+            Console.WriteLine("Would you like to:\n1.Look what's for sale\n2.Check your Inventory");
+            string TavernInteraction = Console.ReadLine();
+            switch(TavernInteraction)
+            {
+                case "1":
+                    foreach (StoreItem aStoreItem in storeitems)
+                    {
+                        Console.WriteLine($"{aStoreItem.itemName}, priced at {aStoreItem.itemPrice} gold coins");
+                    }
+                    Console.WriteLine("What would you like to buy?");
+                    string buyItem = Console.ReadLine();
+                    if (storeitems.ToString().Contains(buyItem))
+                    {
+
+                    }
+                    else 
+                    { 
+                        Inventory.Add(buyItem);
+                        Console.WriteLine(buyItem + " has been added to your inventory");
+                        InventoryCheck();
+                    }
+                break;
             }
         }
 
@@ -86,7 +129,7 @@ namespace TextGame
             {
                 attackType = 2;
             }
-            if(enemyClass == "Heavy")
+            if (enemyClass == "Heavy")
             {
                 EnemyClass enemyType = EnemyClass.Heavy;
             }
@@ -95,9 +138,9 @@ namespace TextGame
                 EnemyClass enemyType = EnemyClass.Light;
             }
             Console.WriteLine($"You've gotten into a fight with {EnemyName}! They appear to have a {enemyClass} build");
-            while (_enemyBaseHealth >  0)
+            while (_enemyBaseHealth > 0)
             {
-                switch(attackType)
+                switch (attackType)
                 {
                     case 1:
                         Console.WriteLine($"{EnemyName} used a light attack");
@@ -119,21 +162,14 @@ namespace TextGame
                 {
                     Console.WriteLine($"You've beaten {EnemyName} in a battle");
                 }
-            }           
+            }
         }
 
         public void CharacterStatusCheck()
         {
             Console.WriteLine($"You are: {status} and your health is at {_health}%");
         }
-        private static int _baseLightDamage = 25;
-        private static int _baseHeavyDamage = 40;
-        private static int _enemyBaseHealth = 100;
-        private string name = "";       
-        private static int _health = 22;
-        StatusEffects StatusEffects { get; set; }
-        StatusEffects status = StatusEffects.Poisoned;
-        List<string> Inventory = new List<string>();     
+
         public void HealthCheck(int health)
         {
             health = _health;
@@ -143,7 +179,7 @@ namespace TextGame
                 Environment.Exit(0);
             }
         }
-        
+
         public void StartCedarCreek()
         {
             Console.Write($"Good Morning, stranger. We found you in a pretty bad state, you're lucky to be alive. What is your name? \nMy name is:");
@@ -174,7 +210,7 @@ namespace TextGame
                 case "2":
                     CharacterStatusCheck();
                     Console.WriteLine("\n\n");
-                    DialogPrompt("stranger", "How are you feeling?", "I feel like shit", "I feel...");                  
+                    DialogPrompt("stranger", "How are you feeling?", "I feel like shit", "I feel...");
                     break;
                 default:
                     Console.WriteLine("...");
@@ -203,7 +239,7 @@ namespace TextGame
             DialogPrompt("stranger", $"now that you're cured... i figure its best you get on your way.. I think I will be seeing you again{name}", "Leave the Building", null);
             string decision3 = Console.ReadLine();
             Console.WriteLine();
-            switch(decision3)
+            switch (decision3)
             {
                 case "1":
                     Console.WriteLine("You've left the building.");
@@ -211,6 +247,15 @@ namespace TextGame
             }
             Console.WriteLine("You step out of the building, and you get grabbed by a sick looking man, armed with a stick.");
             Battle("Heavy", "Ill Looking Male");
+            DialogPrompt(null, "You've prevailed in your fight, not a very warm welcome.\nI figure I should familiarize myself with the area, since I might have to stay here.", "Visit the 'Last Drop'", "Check if the man has anything on him");
+            string decision4 = Console.ReadLine();
+            switch (decision4)
+            {
+                case "1":
+                    TavernInteractions();
+                    Console.WriteLine("");
+                    break;
+            }
         }
     }
 }
