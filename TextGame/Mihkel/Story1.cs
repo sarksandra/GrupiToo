@@ -97,7 +97,7 @@ public class Story1
         Console.WriteLine("\n=== YOUR TASKS ===");
         for (int i = 0; i < tasks.Count; i++)
         {
-            string status = tasks[i].IsCompleted ? "[✓]" : "[ ]";
+            string status = tasks[i].IsCompleted ? "[Done]" : "[ ]";
             Console.WriteLine($"{i + 1}. {status} {tasks[i].Description}");
         }
     }
