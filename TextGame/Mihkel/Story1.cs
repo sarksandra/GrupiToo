@@ -4,7 +4,37 @@ using TextGame.Mihkel;
 
 public class Story1
 {
-    private List<TodoItem> tasks = new List<TodoItem>();
+    private List<TodoItem> tasks = new List<TodoItem>
+    {
+        new TodoItem { MainTitle="Marianna elu"},
+        new TodoItem { Title="Algus", Description = "1. Marianna läheb bussiga", IsCompleted = false },
+        new TodoItem { Title="Algus", Description = "2. Marianna läheb jala", IsCompleted = false },
+        new TodoItem { Title="Kas minna koju või jääda sinna", Description = "1. Marianna jääb sõra juurde ööseks", IsCompleted = false },
+        new TodoItem { Title="Kas minna koju või jääda sinna", Description = "2. Marianna läheb jala koju", IsCompleted = false },
+        new TodoItem { Title="Uus päev", Description = "1. Marianna läheb trenni", IsCompleted = false },
+        new TodoItem { Title="Uus päev", Description = "2. Marianna läheb sõbrannag kinno", IsCompleted = false },
+        new TodoItem { Title="Trenni minemine", Description = "1. Marianna läheb emaga koos", IsCompleted = false },
+        new TodoItem { Title="Trenni minemine", Description = "2. Marianna otsusts üksi minna", IsCompleted = false },
+        new TodoItem { Title="Peale kino", Description = "1. Marianna läheb jäätist sööma", IsCompleted = false },
+        new TodoItem { Title="Peale kino", Description = "2. Marianna läheb üksi koju", IsCompleted = false },
+        new TodoItem { Title="Läheb jäätist sööma", Description = "1. Marianna hakkab karjuma", IsCompleted = false },
+        new TodoItem { Title="Läheb jäätist sööma", Description = "2. Marianna on vaikselt", IsCompleted = false },
+        new TodoItem { Title="Marianna valik", Description = "1. Marianna jäi sõbraga", IsCompleted = false },
+        new TodoItem { Title="Marianna valik", Description = "2. Marianna läks üksi ära", IsCompleted = false },
+        new TodoItem { Title="Kinost koju minek", Description = "1. Marianna võtab kass endaga kaasa", IsCompleted = false },
+        new TodoItem { Title="Kinost koju minek", Description = "2. Marianna läheb üksi koju", IsCompleted = false },
+        new TodoItem { MainTitle="CedarCreek"},
+        new TodoItem { Title="Craete Name"},
+        new TodoItem { Title="Fight(1) time"},
+        new TodoItem { Title="Fight(10) time"},
+        new TodoItem { Title="Use Heavy attack(1) time"},
+        new TodoItem { Title="Use Heavy attack(6) time"},
+        new TodoItem { Title="Use Light attack(1) time"},
+        new TodoItem { Title="Use Light attack(6) time"},
+        new TodoItem { Title="Beat Enemy"},
+        new TodoItem { Title="Your health 50%"},
+        new TodoItem { Title="Buy item"}
+    };
 
     public void Run()
     {
@@ -16,18 +46,12 @@ public class Story1
             switch (choice)
             {
                 case "1":
-                    AddTask();
-                    break;
-                case "2":
                     MarkTaskComplete();
                     break;
-                case "3":
+                case "2":
                     ViewTasks();
                     break;
-                case "4":
-                    DeleteTask();
-                    break;
-                case "5":
+                case "3":
                     Console.WriteLine("Exiting application...");
                     return;
                 default:
@@ -40,28 +64,10 @@ public class Story1
     private void DisplayMenu()
     {
         Console.WriteLine("\n=== TO-DO LIST MANAGER ===");
-        Console.WriteLine("1. Add Task");
-        Console.WriteLine("2. Mark Task as Complete");
-        Console.WriteLine("3. View All Tasks");
-        Console.WriteLine("4. Delete Task");
-        Console.WriteLine("5. Exit");
-        Console.Write("Enter your choice (1-5): ");
-    }
-
-    private void AddTask()
-    {
-        Console.Write("\nEnter task description: ");
-        string description = Console.ReadLine();
-
-        if (!string.IsNullOrWhiteSpace(description))
-        {
-            tasks.Add(new TodoItem(description));
-            Console.WriteLine($"Task added: {description}");
-        }
-        else
-        {
-            Console.WriteLine("Task description cannot be empty!");
-        }
+        Console.WriteLine("1. Mark Task as Complete");
+        Console.WriteLine("2. View All Tasks");
+        Console.WriteLine("3. Exit");
+        Console.Write("Enter your choice (1-3): ");
     }
 
     private void MarkTaskComplete()
@@ -95,33 +101,18 @@ public class Story1
         }
 
         Console.WriteLine("\n=== YOUR TASKS ===");
-        for (int i = 0; i < tasks.Count; i++)
+        for (int i = 1; i < tasks.Count; i++)
         {
             string status = tasks[i].IsCompleted ? "[Done]" : "[ ]";
-            Console.WriteLine($"{i + 1}. {status} {tasks[i].Description}");
-        }
-    }
-
-    private void DeleteTask()
-    {
-        if (tasks.Count == 0)
-        {
-            Console.WriteLine("No tasks available to delete!");
-            return;
-        }
-
-        ViewTasks();
-        Console.Write("\nEnter task number to delete: ");
-
-        if (int.TryParse(Console.ReadLine(), out int index) && index > 0 && index <= tasks.Count)
-        {
-            string deletedTask = tasks[index - 1].Description;
-            tasks.RemoveAt(index - 1);
-            Console.WriteLine($"Deleted task: {deletedTask}");
-        }
-        else
-        {
-            Console.WriteLine("Invalid task number!");
+            if(i == 1)
+            {
+                Console.WriteLine($"{1}. {status} Marianna elu");
+            }
+            if (i == 17)
+            {
+                Console.WriteLine($"{18}. {status} CedarCreek");             
+            }
+            Console.WriteLine($"{i + 1}.{tasks[i].Title} {status} {tasks[i].Description}");
         }
     }
 }
