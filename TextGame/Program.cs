@@ -23,7 +23,7 @@ namespace TextGame
                 Console.WriteLine("2. Marianna elu");
                 Console.WriteLine("3. Cedar Creek");
                 Console.WriteLine();
-                Console.WriteLine("Tee oma elu valik, tont.");
+                Console.WriteLine("Tee oma elu valik.");
 
                 // Kasutaja sisend
                 string gamedecision = Console.ReadLine();
