@@ -29,8 +29,8 @@ namespace TextGame
                     StartAdventure();
                     break;
                 case "2":
-                    ExitGame();
-                    break;
+                    Console.WriteLine("Exiting application...");
+                    return;                  
                 default:
                     Console.WriteLine("Vale valik. Palun proovi uuesti.");
                     ShowMenu();
@@ -321,27 +321,11 @@ namespace TextGame
         // Lõpetab mängu
         private void EndGame()
         {
-            Console.WriteLine("Mäng läbi! Kas tahad mängu uuesti alustada?");
-            Console.WriteLine("1. Jah");
-            Console.WriteLine("2. Ei");
-
-            string choice = Console.ReadLine();
-            if (choice == "1")
-            {
-                Console.Clear();
-                StartGame();
-            }
-            else
-            {
-                ExitGame();
-            }
+            Console.WriteLine("Exiting application...");
+            return;
+           
         }
 
-        // Väljub mängust
-        private void ExitGame()
-        {
-            Console.WriteLine("Aitäh, et mängisid!");
-            Environment.Exit(0);
-        }
+       
     }
 }
